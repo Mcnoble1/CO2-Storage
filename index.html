@@ -1,0 +1,29 @@
+<html>
+<head>
+<script>
+var request = new XMLHttpRequest();
+var urlHere = "https://api.thingspeak.com/channels/1803223/feeds.json?results=10";
+    // urlHere = urlHere + "pi_key=I6AD9OVB2SXX03HC&results=1";
+console.log(urlHere);
+request.open('GET', urlHere, true);
+
+request.onload = function() {
+  if (request.status >= 200 && request.status < 400) {
+    var data = JSON.parse(request.responseText);
+   
+    document.getElementById("camb").innerHTML = data.feeds[0].field1 + ', ' + data.feeds[0].field2 + ', ' + data.feeds[0].field3 + ', ' + data.feeds[0].field4 + ', ' + data.feeds[0].field5 + ', ' + data.feeds[0].field6;
+    } else {
+    // We reached our target server, but it returned an error
+     }
+     };
+
+    request.send();
+    </script>
+    </head>
+    <body>
+    <div  width = "100%" id="camb" style="font-size:15px; text-align:left; color: white; margin-left: -300px; background-color: red; border-left: 300px solid red; border-bottom: 5px solid red; 
+     border-top: 300px solid red; overflow: hidden;  margin-top: -300px; font-family: Brandon, 
+     Grotesque, sans-serif;">
+     </div>
+  </body>
+</html>
